@@ -1,0 +1,115 @@
+.employee-manager {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 16px;
+}
+
+.employee-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 4px;
+    /* Space for scrollbar */
+}
+
+.no-employees {
+    color: var(--color-text-muted);
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.employee-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-md);
+    transition: background 0.2s;
+}
+
+.employee-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.employee-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.employee-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.btn-icon-delete {
+    padding: 6px;
+    color: var(--color-text-muted);
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.employee-item:hover .btn-icon-delete {
+    opacity: 1;
+}
+
+.btn-icon-delete:hover {
+    color: #ef4444;
+    /* Red 500 */
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.add-employee-form {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.glass-input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    color: white;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.glass-input:focus {
+    border-color: var(--color-primary);
+}
+
+.btn-add {
+    background: var(--color-primary);
+    color: white;
+    width: 40px;
+    justify-content: center;
+    padding: 0;
+}
+
+.btn-add:disabled {
+    background: var(--glass-border);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
