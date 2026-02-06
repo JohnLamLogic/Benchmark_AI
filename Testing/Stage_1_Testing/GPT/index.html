@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weekly Restaurant Schedule</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>Weekly Shift Planner</h1>
+      <p>Designed for restaurant managers to build and export staff schedules.</p>
+    </div>
+    <button id="export-schedule" type="button">Download PDF</button>
+  </header>
+
+  <main>
+    <section class="form-card">
+      <h2>Assign a Shift</h2>
+      <form id="shift-form">
+        <input type="hidden" id="shift-id" name="shift-id" />
+        <label>
+          Employee name
+          <input type="text" id="name" name="name" placeholder="Jordan Rivera" required />
+        </label>
+        <label>
+          Role / position
+          <input type="text" id="position" name="position" placeholder="Server, Host, Busser" required />
+        </label>
+        <div class="two-cols">
+          <label>
+            Day of the week
+            <select id="day" name="day" required>
+              <option value="" disabled selected>Select day</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+              <option value="Sunday">Sunday</option>
+            </select>
+          </label>
+          <label>
+            Time span
+            <div class="time-inputs">
+              <input type="time" id="start" name="start" required />
+              <span>to</span>
+              <input type="time" id="end" name="end" required />
+            </div>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submit-button">Add to Schedule</button>
+          <button type="reset" id="reset-button">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="schedule-panel" id="week-schedule">
+      <h2>Weekly Calendar</h2>
+      <div class="grid" aria-live="polite">
+        <template id="day-template">
+          <article class="day-column">
+            <header>
+              <h3></h3>
+              <p class="day-date"></p>
+            </header>
+            <div class="shifts"></div>
+          </article>
+        </template>
+      </div>
+      <p class="empty-state" id="empty-state">No shifts scheduled yet.</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
