@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Weekly Schedule</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Restaurant Scheduler</p>
+          <h1>Plan the weekly shifts</h1>
+          <p class="lede">
+            Create employees, assign them to any position and time, and keep a history of saved
+            schedules so you can reuse proven lineups. Download a PDF when you are ready to publish.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <div class="week-picker">
+            <label for="weekStart">Week starting</label>
+            <input type="date" id="weekStart" />
+          </div>
+          <div class="hero-buttons">
+            <button id="saveSchedule" class="primary">Save schedule</button>
+            <button id="downloadPdf">Download PDF</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="panel saved">
+        <p class="panel-label">Saved schedules</p>
+        <div class="saved-controls">
+          <select id="previousSchedules">
+            <option value="">Select a saved week</option>
+          </select>
+          <button id="loadSavedSchedule">Load saved week</button>
+        </div>
+        <p class="panel-hint">Reload a previous week into the grid to tweak it for the current week.</p>
+      </section>
+
+      <section class="panel hr">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-label">Weekly calendar</p>
+            <h2>Team grid</h2>
+          </div>
+          <p class="panel-hint">Each employee can work multiple shifts per day in any position.</p>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel employees">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-label">Employee directory</p>
+            <h2>Staff</h2>
+          </div>
+        </div>
+        <form id="employeeForm" class="employee-form">
+          <input type="hidden" id="employeeId" />
+          <div class="form-row">
+            <label for="employeeName">Name</label>
+            <input type="text" id="employeeName" placeholder="Alex Rivera" required />
+          </div>
+          <div class="form-row">
+            <label for="employeeEmail">Email</label>
+            <input type="email" id="employeeEmail" placeholder="alex@restaurant.com" required />
+          </div>
+          <div class="form-row">
+            <label for="employeePositions">Positions</label>
+            <input
+              type="text"
+              id="employeePositions"
+              placeholder="server, host, bar"
+              required
+            />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary">Save employee</button>
+            <button type="button" id="resetEmployee">Reset</button>
+          </div>
+        </form>
+        <div class="shift-builder">
+          <p class="panel-label">Quick shift entry</p>
+          <form id="shiftBuilderForm" class="shift-builder-form">
+            <div class="form-row">
+              <label for="shiftEmployee">Employee</label>
+              <select id="shiftEmployee" required>
+                <option value="">Select employee</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="shiftDay">Day</label>
+              <select id="shiftDay" required>
+                <option value="">Select day</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="shiftStart">Start time</label>
+              <input type="time" id="shiftStart" value="09:00" required />
+            </div>
+            <div class="form-row">
+              <label for="shiftEnd">End time</label>
+              <input type="time" id="shiftEnd" value="13:00" required />
+            </div>
+            <div class="form-row">
+              <label for="shiftBuilderPosition">Position</label>
+              <input type="text" id="shiftBuilderPosition" placeholder="server, host, etc." required />
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="primary">Assign shift</button>
+            </div>
+          </form>
+        </div>
+        <div id="employeeList" class="employee-list"></div>
+      </section>
+    </main>
+
+    <div class="status-toast" id="statusToast"></div>
+
+    <div class="modal" id="shiftModal" data-visible="false">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h3 id="modalHeading">Add shift</h3>
+          <button type="button" class="modal-close" id="closeModal">×</button>
+        </div>
+        <form id="shiftForm" class="modal-form">
+          <input type="hidden" name="shiftId" id="modalShiftId" />
+          <input type="hidden" name="employeeId" id="modalEmployeeId" />
+          <input type="hidden" name="day" id="modalDay" />
+          <p class="modal-subtitle">
+            <span id="modalEmployeeName"></span>
+            <span class="dot">•</span>
+            <span id="modalDayLabel"></span>
+          </p>
+          <label>
+            Start time
+            <input type="time" name="start" id="modalStart" required />
+          </label>
+          <label>
+            End time
+            <input type="time" name="end" id="modalEnd" required />
+          </label>
+          <label>
+            Position
+            <input type="text" name="position" id="modalPosition" required />
+          </label>
+          <div class="modal-actions">
+            <button type="submit" class="primary">Save shift</button>
+            <button type="button" id="deleteShift" class="ghost">Remove shift</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
