@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RestaurantOS — Schedule Manager</title>
+    <meta name="description"
+        content="Professional restaurant employee scheduling software with weekly grid view, employee management, and PDF export." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <!-- jsPDF for PDF export (self-contained CDN-free fallback using bundled script) -->
+    <script src="libs/jspdf.umd.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon">🍽️</span>
+                <span class="logo-text">RestaurantOS</span>
+            </div>
+            <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">✕</button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-view="schedule" aria-label="Schedule view">
+                <span class="nav-icon">📅</span>
+                <span>Schedule</span>
+            </button>
+            <button class="nav-item" data-view="employees" aria-label="Employees view">
+                <span class="nav-icon">👥</span>
+                <span>Employees</span>
+            </button>
+            <button class="nav-item" data-view="history" aria-label="Saved schedules">
+                <span class="nav-icon">🗂️</span>
+                <span>Saved Schedules</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="app-version">v1.0 · Manager Portal</div>
+        </div>
+    </aside>
+
+    <!-- ════════════════════════════════════════════════════ MAIN AREA ═══ -->
+    <div class="main-wrap" id="mainWrap">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+                <h1 class="topbar-title" id="pageTitle">Weekly Schedule</h1>
+            </div>
+            <div class="topbar-right" id="topbarActions">
+                <!-- populated by JS per view -->
+            </div>
+        </header>
+
+        <!-- ══════════════════════════ SCHEDULE VIEW ══════════════════════ -->
+        <section class="view active" id="view-schedule">
+
+            <!-- Week Picker -->
+            <div class="week-bar">
+                <button class="btn btn-ghost" id="prevWeek">‹ Prev</button>
+                <div class="week-label" id="weekLabel">Loading…</div>
+                <button class="btn btn-ghost" id="nextWeek">Next ›</button>
+            </div>
+
+            <!-- Grid wrapper (scrollable) -->
+            <div class="schedule-container">
+                <div class="schedule-grid-wrap" id="scheduleGridWrap">
+                    <!-- table injected by JS -->
+                </div>
+            </div>
+
+            <!-- Floating action bar -->
+            <div class="fab-bar">
+                <button class="btn btn-primary" id="saveScheduleBtn">💾 Save Schedule</button>
+                <button class="btn btn-secondary" id="downloadPdfBtn">⬇️ Download PDF</button>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════ EMPLOYEES VIEW ════════════════════ -->
+        <section class="view" id="view-employees">
+            <div class="section-header">
+                <h2>Employee Roster</h2>
+                <button class="btn btn-primary" id="addEmployeeBtn">＋ Add Employee</button>
+            </div>
+            <div class="employee-grid" id="employeeGrid">
+                <!-- cards injected by JS -->
+            </div>
+        </section>
+
+        <!-- ══════════════════════════ HISTORY VIEW ══════════════════════ -->
+        <section class="view" id="view-history">
+            <div class="section-header">
+                <h2>Saved Schedules</h2>
+            </div>
+            <div class="history-list" id="historyList">
+                <!-- items injected by JS -->
+            </div>
+        </section>
+
+    </div><!-- /main-wrap -->
+
+    <!-- ══════════════════════════════════════════════ MODALS ═══════════ -->
+
+    <!-- Add / Edit Employee Modal -->
+    <div class="modal-overlay" id="employeeModal" role="dialog" aria-modal="true" aria-labelledby="empModalTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="empModalTitle">Add Employee</h3>
+                <button class="modal-close" data-modal="employeeModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="empId" />
+                <div class="field-group">
+                    <label for="empName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="empName" placeholder="e.g. Jane Smith" maxlength="60" />
+                </div>
+                <div class="field-group">
+                    <label for="empEmail">Email</label>
+                    <input type="email" id="empEmail" placeholder="jane@example.com" />
+                </div>
+                <div class="field-group">
+                    <label>Positions <span class="required">*</span></label>
+                    <div class="position-checkboxes" id="positionCheckboxes">
+                        <!-- injected by JS -->
+                    </div>
+                    <div class="add-position-row">
+                        <input type="text" id="customPositionInput" placeholder="Add custom position…" maxlength="40" />
+                        <button class="btn btn-ghost btn-sm" id="addCustomPositionBtn">＋ Add</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" data-modal="employeeModal">Cancel</button>
+                <button class="btn btn-primary" id="saveEmployeeBtn">Save Employee</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add / Edit Shift Modal -->
+    <div class="modal-overlay" id="shiftModal" role="dialog" aria-modal="true" aria-labelledby="shiftModalTitle">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3 id="shiftModalTitle">Add Shift</h3>
+                <button class="modal-close" data-modal="shiftModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="shiftId" />
+                <input type="hidden" id="shiftEmpId" />
+                <input type="hidden" id="shiftDay" />
+                <div class="field-group">
+                    <label>Employee</label>
+                    <div class="shift-emp-name" id="shiftEmpName">—</div>
+                </div>
+                <div class="field-group">
+                    <label>Day</label>
+                    <div class="shift-day-label" id="shiftDayLabel">—</div>
+                </div>
+                <div class="time-row">
+                    <div class="field-group">
+                        <label for="shiftStart">Start Time <span class="required">*</span></label>
+                        <input type="time" id="shiftStart" />
+                    </div>
+                    <div class="field-group">
+                        <label for="shiftEnd">End Time <span class="required">*</span></label>
+                        <input type="time" id="shiftEnd" />
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label for="shiftPosition">Position <span class="required">*</span></label>
+                    <select id="shiftPosition">
+                        <!-- populated from employee's positions -->
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" data-modal="shiftModal">Cancel</button>
+                <button class="btn btn-primary" id="saveShiftBtn">Save Shift</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal-overlay" id="confirmModal" role="dialog" aria-modal="true">
+        <div class="modal modal-xs">
+            <div class="modal-header">
+                <h3 id="confirmTitle">Confirm Delete</h3>
+                <button class="modal-close" data-modal="confirmModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" data-modal="confirmModal">Cancel</button>
+                <button class="btn btn-danger" id="confirmOkBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Past Schedule Modal -->
+    <div class="modal-overlay" id="loadScheduleModal" role="dialog" aria-modal="true">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3>Load Saved Schedule</h3>
+                <button class="modal-close" data-modal="loadScheduleModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="field-group">
+                    <label>Saved Schedule</label>
+                    <div class="shift-emp-name" id="loadScheduleDetail">—</div>
+                </div>
+                <div class="field-group">
+                    <label for="loadTargetWeek">Load Into Week <span class="required">*</span></label>
+                    <input type="date" id="loadTargetWeek" />
+                    <span class="muted" style="font-size:11px;margin-top:4px;">Any day within the target week works —
+                        the schedule will fill the full Mon–Sun week.</span>
+                </div>
+                <p class="muted" style="margin-top:4px;">⚠️ Existing shifts for the selected week will be replaced.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" data-modal="loadScheduleModal">Cancel</button>
+                <button class="btn btn-primary" id="confirmLoadBtn">Load Into Week</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

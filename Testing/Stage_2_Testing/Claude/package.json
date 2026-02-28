@@ -1,0 +1,11 @@
+{
+  "name": "restaurant-os",
+  "version": "1.0.0",
+  "description": "Restaurant employee scheduling software",
+  "scripts": {
+    "start": "npx --yes serve . -l 3000",
+    "dev": "npx --yes live-server --port=3100 --open=index.html"
+  },
+  "keywords": ["restaurant", "scheduling", "employee"],
+  "license": "MIT"
+}
