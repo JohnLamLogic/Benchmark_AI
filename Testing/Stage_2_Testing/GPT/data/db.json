@@ -1,0 +1,155 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Test",
+      "email": "test@example.com",
+      "positions": [
+        "server"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "John Smith",
+      "email": "joh@miami.edu",
+      "positions": [
+        "Sever"
+      ]
+    }
+  ],
+  "weeks": [
+    {
+      "id": 1,
+      "startDate": "2026-02-23",
+      "entries": [
+        {
+          "id": 1,
+          "employeeId": 2,
+          "day": "Monday",
+          "start": "09:00",
+          "end": "14:00",
+          "position": "Sever"
+        },
+        {
+          "id": 2,
+          "employeeId": 2,
+          "day": "Monday",
+          "start": "22:00",
+          "end": "00:00",
+          "position": "Sever"
+        },
+        {
+          "id": 3,
+          "employeeId": 2,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "Sever"
+        },
+        {
+          "id": 4,
+          "employeeId": 2,
+          "day": "Wednesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "Sever"
+        },
+        {
+          "id": 5,
+          "employeeId": 2,
+          "day": "Thursday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "Sever"
+        },
+        {
+          "id": 6,
+          "employeeId": 2,
+          "day": "Friday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "Sever"
+        },
+        {
+          "id": 7,
+          "employeeId": 2,
+          "day": "Saturday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "Sever"
+        },
+        {
+          "id": 8,
+          "employeeId": 2,
+          "day": "Sunday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "Sever"
+        },
+        {
+          "id": 9,
+          "employeeId": 1,
+          "day": "Monday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 10,
+          "employeeId": 1,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 11,
+          "employeeId": 1,
+          "day": "Wednesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 12,
+          "employeeId": 1,
+          "day": "Thursday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 13,
+          "employeeId": 1,
+          "day": "Friday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 14,
+          "employeeId": 1,
+          "day": "Saturday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 15,
+          "employeeId": 1,
+          "day": "Sunday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        }
+      ],
+      "createdAt": "2026-02-27T00:28:54.476Z",
+      "updatedAt": "2026-02-27T00:28:54.476Z"
+    }
+  ],
+  "meta": {
+    "nextEmployeeId": 4,
+    "nextWeekId": 2,
+    "nextEntryId": 16
+  }
+}
