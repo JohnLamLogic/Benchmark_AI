@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String
+  positions String
+  shifts    Shift[]
+}
+
+model Week {
+  id         Int     @id @default(autoincrement())
+  start_date String
+  shifts     Shift[]
+}
+
+model Shift {
+  id         Int      @id @default(autoincrement())
+  employeeId Int
+  weekId     Int
+  dayOfWeek  Int
+  startTime  String
+  endTime    String
+  position   String
+  week       Week     @relation(fields: [weekId], references: [id], onDelete: Cascade)
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}

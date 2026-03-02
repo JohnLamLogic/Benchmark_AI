@@ -1,0 +1,98 @@
+﻿node.exe : C:\Benchmark
+_AI\Testing\Stage_3_Tes
+ting\Gemini\node_module
+s\@prisma\client\src\ru
+ntime\getPrismaClient.t
+s:260
+At C:\Users\caitl\AppDa
+ta\Local\fnm_multishell
+s\18840_1772471456475\n
+px.ps1:29 char:3
++   & $NODE_EXE 
+$NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (C:\Benchmark_   
+ AI...maClient.ts:2    
+60:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+        throw new Prism
+aClientInitializationEr
+ror(
+              ^
+
+
+PrismaClientInitializat
+ionError: 
+`PrismaClient` needs 
+to be constructed with 
+a non-empty, valid 
+`PrismaClientOptions`:
+
+```
+new PrismaClient({
+  ...
+})
+```
+
+or
+
+```
+constructor() {
+  super({ ... });
+}
+```
+          
+    at new t (C:\Benchm
+ark_AI\Testing\Stage_3_
+Testing\Gemini\node_mod
+ules\@prisma\client\src
+\runtime\getPrismaClien
+t.ts:260:15)
+    at fs (C:\Benchmark
+_AI\Testing\Stage_3_Tes
+ting\Gemini\debug.ts:4:
+16)
+    at 
+Object.<anonymous> (C:\
+Benchmark_AI\Testing\St
+age_3_Testing\Gemini\de
+bug.ts:23:6)
+    at Module._compile 
+(node:internal/modules/
+cjs/loader:1730:14)
+    at 
+Object.transformer (C:\
+Users\caitl\AppData\Loc
+al\npm-cache\_npx\fd45a
+72a545557e9\node_module
+s\tsx\dist\register-D46
+fvsV_.cjs:3:1104)
+    at Module.load (nod
+e:internal/modules/cjs/
+loader:1465:32)
+    at Function._load (
+node:internal/modules/c
+js/loader:1282:12)
+    at TracingChannel.t
+raceSync (node:diagnost
+ics_channel:322:14)
+    at wrapModuleLoad (
+node:internal/modules/c
+js/loader:235:24)
+    at cjsLoader (node:
+internal/modules/esm/tr
+anslators:266:5) {
+  clientVersion: 
+'7.4.2',
+  errorCode: undefined,
+  retryable: undefined
+}
+
+Node.js v22.15.0

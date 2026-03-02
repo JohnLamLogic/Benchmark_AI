@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Scheduler</title>
+    <meta name="description"
+        content="A powerful weekly scheduling tool for restaurant managers. Assign shifts, manage employees, export PDFs, and send schedules via email.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ─── TOP NAV ──────────────────────────────────────────────────────────── -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="logo">
+                <span class="logo-icon">🍽️</span>
+                <span class="logo-text">RestaurantScheduler</span>
+            </div>
+        </div>
+        <div class="topbar-center">
+            <button class="week-nav-btn" id="prevWeekBtn" title="Previous week">&#8592;</button>
+            <div class="week-label-wrap">
+                <span class="week-label" id="weekLabel">Loading...</span>
+                <span class="week-sub" id="weekSub"></span>
+            </div>
+            <button class="week-nav-btn" id="nextWeekBtn" title="Next week">&#8594;</button>
+        </div>
+        <div class="topbar-right">
+            <button class="btn btn-ghost" id="loadScheduleBtn" title="Load a saved schedule">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M3 7v13h18V7M3 7l9-4 9 4M9 21v-9h6v9" />
+                </svg>
+                Load
+            </button>
+            <button class="btn btn-ghost" id="saveScheduleBtn" title="Save current week's schedule">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                </svg>
+                Save
+            </button>
+            <button class="btn btn-outline" id="downloadPdfBtn" title="Download PDF">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Download PDF
+            </button>
+            <div class="gmail-section">
+                <button class="btn btn-gmail" id="gmailBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+                    </svg>
+                    <span id="gmailBtnText">Connect Gmail</span>
+                </button>
+                <button class="btn btn-send" id="sendOutBtn" style="display:none">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                    Send Out
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ─── MAIN LAYOUT ──────────────────────────────────────────────────────── -->
+    <div class="app-layout">
+
+        <!-- ─── SIDEBAR ──────────────────────────────────────────────────────── -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Employees</h2>
+                <button class="btn btn-primary btn-sm" id="addEmployeeBtn">+ Add</button>
+            </div>
+            <div class="employee-list" id="employeeList">
+                <div class="empty-state">Loading employees...</div>
+            </div>
+        </aside>
+
+        <!-- ─── SCHEDULE GRID ─────────────────────────────────────────────────── -->
+        <main class="schedule-area">
+            <div class="schedule-scroll-wrap">
+                <div class="schedule-grid" id="scheduleGrid">
+                    <!-- Built dynamically by JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════ -->
+    <!-- MODALS                                                                  -->
+    <!-- ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Add/Edit Employee Modal -->
+    <div class="modal-overlay" id="employeeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="employeeModalTitle">Add Employee</h3>
+                <button class="modal-close" id="closeEmployeeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="employeeId">
+                <div class="form-group">
+                    <label for="empName">Full Name</label>
+                    <input type="text" id="empName" placeholder="e.g. Jane Smith" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Positions</label>
+                    <div class="positions-grid" id="positionsGrid">
+                        <!-- checkboxes added by JS -->
+                    </div>
+                    <div class="custom-position-row">
+                        <input type="text" id="customPositionInput" placeholder="Add custom position...">
+                        <button class="btn btn-ghost btn-sm" id="addCustomPositionBtn">Add</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="empEmail">Email Address</label>
+                    <input type="email" id="empEmail" placeholder="e.g. jane@example.com" autocomplete="off">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelEmployeeModal">Cancel</button>
+                <button class="btn btn-primary" id="saveEmployeeBtn">Save Employee</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Shift Modal -->
+    <div class="modal-overlay" id="shiftModal">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3 id="shiftModalTitle">Add Shift</h3>
+                <button class="modal-close" id="closeShiftModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="shiftId">
+                <input type="hidden" id="shiftEmployeeId">
+                <input type="hidden" id="shiftDayOfWeek">
+                <div class="shift-employee-info" id="shiftEmployeeInfo"></div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="shiftStart">Start Time</label>
+                        <input type="time" id="shiftStart">
+                    </div>
+                    <div class="form-group">
+                        <label for="shiftEnd">End Time</label>
+                        <input type="time" id="shiftEnd">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="shiftPosition">Position</label>
+                    <select id="shiftPosition">
+                        <option value="">Select position...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelShiftModal">Cancel</button>
+                <button class="btn btn-danger" id="deleteShiftBtn" style="display:none">Delete Shift</button>
+                <button class="btn btn-primary" id="saveShiftBtn">Save Shift</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Schedule Modal -->
+    <div class="modal-overlay" id="saveScheduleModal">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3>Save Schedule</h3>
+                <button class="modal-close" id="closeSaveModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Give this week's schedule a memorable name so you can load it later.</p>
+                <div class="form-group">
+                    <label for="scheduleName">Schedule Name</label>
+                    <input type="text" id="scheduleName" placeholder='e.g. "Spring Weekend Crew"'>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelSaveModal">Cancel</button>
+                <button class="btn btn-primary" id="confirmSaveBtn">Save Schedule</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Schedule Modal -->
+    <div class="modal-overlay" id="loadScheduleModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Load Saved Schedule</h3>
+                <button class="modal-close" id="closeLoadModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">Select a saved schedule to load it into a target week.</p>
+                <div class="saved-schedules-list" id="savedSchedulesList">
+                    <div class="empty-state">No saved schedules yet.</div>
+                </div>
+                <div class="form-group" id="loadTargetGroup" style="margin-top:1rem; display:none">
+                    <label for="loadTargetWeek">Load Into Week Starting</label>
+                    <input type="date" id="loadTargetWeek">
+                    <p class="field-hint">Choose the Monday of the target week.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelLoadModal">Cancel</button>
+                <button class="btn btn-primary" id="confirmLoadBtn" style="display:none">Load Schedule</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Send Email Confirmation Modal -->
+    <div class="modal-overlay" id="sendEmailModal">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3>Send Schedule to All Employees</h3>
+                <button class="modal-close" id="closeSendModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">This will email the current week's PDF schedule to every employee on your list.
+                </p>
+                <div class="recipient-list" id="recipientList"></div>
+                <div class="send-result" id="sendResult" style="display:none"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelSendModal">Cancel</button>
+                <button class="btn btn-send" id="confirmSendBtn">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                    Send Emails
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
