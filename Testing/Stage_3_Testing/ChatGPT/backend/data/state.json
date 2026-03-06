@@ -1,0 +1,120 @@
+{
+  "employees": [
+    {
+      "id": "ea72491d-fa25-4fdd-a4f1-660d3e5bdfe0",
+      "name": "John Lam",
+      "email": "johnathonrlamoreaux@gmail.com",
+      "positions": [
+        "Server",
+        "Host",
+        "Busser"
+      ],
+      "createdAt": "2026-03-06T01:10:29.365Z"
+    },
+    {
+      "id": "d1433c5a-344d-42f3-83f4-6a37edd004bf",
+      "name": "joe lam",
+      "email": "johnathonlamoreaux@gmail.com",
+      "positions": [
+        "Server"
+      ],
+      "createdAt": "2026-03-06T01:12:22.512Z"
+    }
+  ],
+  "schedules": [
+    {
+      "id": "630d9a67-cb6a-4bd6-ae90-dbdebdc64183",
+      "weekStart": "2026-02-23",
+      "createdAt": "2026-03-06T01:14:39.532Z",
+      "updatedAt": "2026-03-06T01:14:39.532Z"
+    },
+    {
+      "id": "025e9dcb-24fc-4a8f-88b7-2b556b2a948f",
+      "weekStart": "2026-03-02",
+      "createdAt": "2026-03-06T01:15:19.694Z",
+      "updatedAt": "2026-03-06T01:15:19.694Z"
+    }
+  ],
+  "shifts": [
+    {
+      "id": "3e840be5-2e7e-447a-8b24-c50d529f585d",
+      "scheduleId": "630d9a67-cb6a-4bd6-ae90-dbdebdc64183",
+      "employeeId": "ea72491d-fa25-4fdd-a4f1-660d3e5bdfe0",
+      "day": 0,
+      "position": "Server",
+      "startTime": "08:00",
+      "endTime": "21:00",
+      "note": "dont be late "
+    },
+    {
+      "id": "f4c5bae0-9441-4a5f-a802-f4e514225727",
+      "scheduleId": "630d9a67-cb6a-4bd6-ae90-dbdebdc64183",
+      "employeeId": "ea72491d-fa25-4fdd-a4f1-660d3e5bdfe0",
+      "day": 0,
+      "position": "Host",
+      "startTime": "08:00",
+      "endTime": "17:00",
+      "note": "joe"
+    },
+    {
+      "id": "0fd26ac9-e1ed-4041-b00b-d1871835cf9d",
+      "scheduleId": "630d9a67-cb6a-4bd6-ae90-dbdebdc64183",
+      "employeeId": "d1433c5a-344d-42f3-83f4-6a37edd004bf",
+      "day": 1,
+      "position": "Joe",
+      "startTime": "08:00",
+      "endTime": "09:00",
+      "note": "n otes"
+    },
+    {
+      "id": "f9b02e59-7f28-4743-9366-6c5ec42d3ed2",
+      "scheduleId": "630d9a67-cb6a-4bd6-ae90-dbdebdc64183",
+      "employeeId": "ea72491d-fa25-4fdd-a4f1-660d3e5bdfe0",
+      "day": 4,
+      "position": "Washer",
+      "startTime": "05:00",
+      "endTime": "06:00",
+      "note": "notes"
+    },
+    {
+      "id": "bdcf291b-6c55-406d-8eaf-55a072d8a18f",
+      "scheduleId": "025e9dcb-24fc-4a8f-88b7-2b556b2a948f",
+      "employeeId": "ea72491d-fa25-4fdd-a4f1-660d3e5bdfe0",
+      "day": 0,
+      "position": "Server",
+      "startTime": "08:00",
+      "endTime": "21:00",
+      "note": "dont be late "
+    },
+    {
+      "id": "5d2cc478-9ae0-48bd-8426-bfc279db93bf",
+      "scheduleId": "025e9dcb-24fc-4a8f-88b7-2b556b2a948f",
+      "employeeId": "ea72491d-fa25-4fdd-a4f1-660d3e5bdfe0",
+      "day": 0,
+      "position": "Host",
+      "startTime": "08:00",
+      "endTime": "17:00",
+      "note": "joe"
+    },
+    {
+      "id": "861f8639-462a-4c4e-aac2-6064b923079d",
+      "scheduleId": "025e9dcb-24fc-4a8f-88b7-2b556b2a948f",
+      "employeeId": "d1433c5a-344d-42f3-83f4-6a37edd004bf",
+      "day": 1,
+      "position": "Joe",
+      "startTime": "08:00",
+      "endTime": "09:00",
+      "note": "n otes"
+    },
+    {
+      "id": "76416ac2-8c8b-422b-9c08-eb76ab6ce37f",
+      "scheduleId": "025e9dcb-24fc-4a8f-88b7-2b556b2a948f",
+      "employeeId": "ea72491d-fa25-4fdd-a4f1-660d3e5bdfe0",
+      "day": 4,
+      "position": "Washer",
+      "startTime": "05:00",
+      "endTime": "06:00",
+      "note": "notes"
+    }
+  ]
+}
