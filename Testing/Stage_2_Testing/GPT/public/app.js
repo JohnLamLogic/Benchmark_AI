@@ -34,9 +34,7 @@ function setupEventHandlers() {
       showStatus('Choose a saved week to load.', 'error');
       return;
     }
-    state.weekStart = select.value;
-    document.getElementById('weekStart').value = select.value;
-    loadWeek(select.value, true);
+    loadWeek(select.value, { suppressMessage: true, setWeek: false });
   });
 
   document.getElementById('scheduleBody').addEventListener('click', handleScheduleClick);
@@ -109,18 +107,25 @@ async function loadScheduleSummaries() {
   }
 }
 
-async function loadWeek(startDate, suppressMessage = false) {
+async function loadWeek(startDate, options = {}) {
+  const { suppressMessage = false, setWeek = true } = options;
   try {
     const week = await fetchJson(`${API_BASE}/weeks/${startDate}`);
     state.entries = (week.entries || []).map((entry) => convertEntry(entry));
     renderScheduleGrid();
+    if (setWeek) {
+      state.weekStart = startDate;
+      document.getElementById('weekStart').value = startDate;
+    }
     if (!suppressMessage) {
       showStatus('Loaded schedule for the selected week.', 'success');
     }
   } catch (err) {
     state.entries = [];
     renderScheduleGrid();
-    showStatus('Starting a new schedule for that week.', 'info');
+    if (!suppressMessage) {
+      showStatus('Starting a new schedule for that week.', 'info');
+    }
   }
 }
 
