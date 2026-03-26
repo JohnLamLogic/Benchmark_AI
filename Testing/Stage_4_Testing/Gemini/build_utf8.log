@@ -1,0 +1,182 @@
+﻿
+> temp@0.1.0 build
+> next build
+
+node.exe : ΓÜá 
+Warning: Next.js 
+inferred your 
+workspace root, but it 
+may not be correct.
+At C:\Users\caitl\AppDa
+ta\Local\fnm_multishell
+s\18712_1773945632049\n
+pm.ps1:29 char:3
++   & $NODE_EXE 
+$NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (ΓÜá Warning:    
+ Ne...not be correc    
+t.:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+ We detected multiple 
+lockfiles and selected 
+the directory of C:\Ben
+chmark_AI\package-lock.
+json as the root 
+directory.
+ To silence this 
+warning, set 
+`turbopack.root` in 
+your Next.js config, 
+or consider removing 
+one of the lockfiles 
+if it's not needed.
+   See https://nextjs.o
+rg/docs/app/api-referen
+ce/config/next-config-j
+s/turbopack#root-direct
+ory for more 
+information.
+ Detected additional 
+lockfiles: 
+   * C:\Benchmark_AI\Te
+sting\Stage_4_Testing\G
+emini\package-lock.json
+
+Γû▓ Next.js 16.2.0 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build 
+failed with 2 errors:
+./Testing/Stage_4_Testi
+ng/Gemini/src/lib/prism
+a.ts:1:1
+Module not found: 
+Can't resolve 
+'@prisma/client'
+[31m[1m>[0m [90m1 
+|[0m [36mimport[0m 
+{ 
+[33mPrismaClient[0m 
+} [36mfrom[0m [32m'@
+prisma/client'[0m
+  [90m  |[0m [31m[1
+m^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+[0m
+  [90m2 |[0m
+  [90m3 |[0m 
+[36mconst[0m 
+prismaClientSingleton 
+= () => {
+  [90m4 |[0m   
+[36mreturn[0m 
+[36mnew[0m 
+[33mPrismaClient[0m()
+
+
+
+Import trace:
+  App Route:
+    ./Testing/Stage_4_T
+esting/Gemini/src/lib/p
+risma.ts
+    ./Testing/Stage_4_T
+esting/Gemini/src/app/a
+pi/time-off/[id]/route.
+ts
+
+https://nextjs.org/docs
+/messages/module-not-fo
+und
+
+
+./Testing/Stage_4_Testi
+ng/Gemini/node_modules/
+fflate/lib/node.cjs:22:
+13
+Module not found: 
+Can't resolve <dynamic>
+  [90m20 |[0m node_wo
+rker_1[[32m"default"[
+0m] = [33mWorker[0m 
+? [36mfunction[0m 
+(c, _, msg, transfer, 
+cb) {
+  [90m21 |[0m     
+[36mvar[0m done = 
+[36mfalse[0m;
+[31m[1m>[0m [90m22 
+|[0m     [36mvar[0m 
+w = [36mnew[0m 
+[33mWorker[0m(c + 
+workerAdd, { eval: 
+[36mtrue[0m })
+  [90m   |[0m        
+     [31m[1m^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^[0m
+  [90m23 |[0m        
+ .on([32m'error'[0m, 
+[36mfunction[0m (e) 
+{ [36mreturn[0m 
+cb(e, [36mnull[0m); 
+})
+  [90m24 |[0m        
+ .on([32m'message'[0m
+, [36mfunction[0m 
+(m) { [36mreturn[0m 
+cb([36mnull[0m, m); 
+})
+  [90m25 |[0m        
+ .on([32m'exit'[0m, 
+[36mfunction[0m (c) {
+
+
+
+Import trace:
+  Client Component SSR:
+    ./Testing/Stage_4_T
+esting/Gemini/node_modu
+les/fflate/lib/node.cjs
+ [Client Component SSR]
+    ./Testing/Stage_4_T
+esting/Gemini/node_modu
+les/jspdf/dist/jspdf.no
+de.min.js [Client 
+Component SSR]
+    ./Testing/Stage_4_T
+esting/Gemini/src/app/m
+anager/schedule/page.ts
+x [Client Component 
+SSR]
+    ./Testing/Stage_4_T
+esting/Gemini/src/app/m
+anager/schedule/page.ts
+x [Server Component]
+
+https://nextjs.org/docs
+/messages/module-not-fo
+und
+
+
+    at <unknown> (./Tes
+ting/Stage_4_Testing/Ge
+mini/src/lib/prisma.ts:
+1:1)
+    at <unknown> (https
+://nextjs.org/docs/mess
+ages/module-not-found)
+    at <unknown> (https
+://nextjs.org/docs/mess
+ages/module-not-found)

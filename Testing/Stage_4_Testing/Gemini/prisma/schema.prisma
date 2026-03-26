@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id              String            @id @default(cuid())
+  name            String
+  email           String            @unique
+  payRate         Float
+  isManager       Boolean           @default(false)
+  positions       String            
+  shifts          Shift[]
+  timeOffRequests TimeOffRequest[]
+}
+
+model Shift {
+  id              String    @id @default(cuid())
+  date            DateTime
+  startTime       String
+  endTime         String
+  position        String
+  weekIdentifier  String    
+  employeeId      String
+  employee        Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
+
+model TimeOffRequest {
+  id              String    @id @default(cuid())
+  date            DateTime
+  reason          String
+  status          String    @default("pending") 
+  employeeId      String
+  employee        Employee  @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
