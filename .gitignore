@@ -1,3 +1,4 @@
 Testing/Stage_3_Testing/ChatGPT/backend/.env
 Testing/Stage_3_Testing/Claude/.env
 Testing/Stage_3_Testing/Claude/tokens.json
+Testing/Stage_4_Testing/Claude/db/data/gmailTokens.json

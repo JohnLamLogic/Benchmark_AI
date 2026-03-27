@@ -9,11 +9,21 @@
       ]
     },
     {
-      "id": 2,
-      "name": "John Smith",
-      "email": "joh@miami.edu",
+      "id": 4,
+      "name": "Jane Doe",
+      "email": "Jane@email.com",
       "positions": [
-        "Sever"
+        "server",
+        "busser"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "John Smith",
+      "email": "john@mail.com",
+      "positions": [
+        "busser",
+        "manager"
       ]
     }
   ],
@@ -22,70 +32,6 @@
       "id": 1,
       "startDate": "2026-02-23",
       "entries": [
-        {
-          "id": 1,
-          "employeeId": 2,
-          "day": "Monday",
-          "start": "09:00",
-          "end": "14:00",
-          "position": "Sever"
-        },
-        {
-          "id": 2,
-          "employeeId": 2,
-          "day": "Monday",
-          "start": "22:00",
-          "end": "00:00",
-          "position": "Sever"
-        },
-        {
-          "id": 3,
-          "employeeId": 2,
-          "day": "Tuesday",
-          "start": "09:00",
-          "end": "13:00",
-          "position": "Sever"
-        },
-        {
-          "id": 4,
-          "employeeId": 2,
-          "day": "Wednesday",
-          "start": "09:00",
-          "end": "13:00",
-          "position": "Sever"
-        },
-        {
-          "id": 5,
-          "employeeId": 2,
-          "day": "Thursday",
-          "start": "09:00",
-          "end": "13:00",
-          "position": "Sever"
-        },
-        {
-          "id": 6,
-          "employeeId": 2,
-          "day": "Friday",
-          "start": "09:00",
-          "end": "13:00",
-          "position": "Sever"
-        },
-        {
-          "id": 7,
-          "employeeId": 2,
-          "day": "Saturday",
-          "start": "09:00",
-          "end": "13:00",
-          "position": "Sever"
-        },
-        {
-          "id": 8,
-          "employeeId": 2,
-          "day": "Sunday",
-          "start": "09:00",
-          "end": "13:00",
-          "position": "Sever"
-        },
         {
           "id": 9,
           "employeeId": 1,
@@ -151,14 +97,6 @@
       "startDate": "2026-03-09",
       "entries": [
         {
-          "id": 16,
-          "employeeId": 2,
-          "day": "Monday",
-          "start": "09:00",
-          "end": "13:00",
-          "position": "Sever"
-        },
-        {
           "id": 17,
           "employeeId": 1,
           "day": "Wednesday",
@@ -175,29 +113,124 @@
       "startDate": "2026-03-23",
       "entries": [
         {
-          "id": 16,
-          "employeeId": 2,
+          "id": 19,
+          "employeeId": 4,
+          "day": "Monday",
+          "start": "15:00",
+          "end": "21:00",
+          "position": "busser"
+        },
+        {
+          "id": 20,
+          "employeeId": 5,
           "day": "Monday",
           "start": "09:00",
           "end": "13:00",
-          "position": "Sever"
+          "position": "busser"
         },
         {
-          "id": 17,
+          "id": 21,
           "employeeId": 1,
-          "day": "Wednesday",
+          "day": "Monday",
           "start": "09:00",
           "end": "13:00",
           "position": "server"
+        },
+        {
+          "id": 22,
+          "employeeId": 4,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 23,
+          "employeeId": 1,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 24,
+          "employeeId": 5,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "busser"
         }
       ],
       "createdAt": "2026-03-12T15:49:59.232Z",
-      "updatedAt": "2026-03-12T15:49:59.232Z"
+      "updatedAt": "2026-03-16T16:09:56.972Z"
+    },
+    {
+      "id": 4,
+      "startDate": "2026-03-16",
+      "entries": [],
+      "createdAt": "2026-03-16T15:18:29.085Z",
+      "updatedAt": "2026-03-16T15:18:29.085Z"
+    },
+    {
+      "id": 5,
+      "startDate": "2026-03-30",
+      "entries": [
+        {
+          "id": 19,
+          "employeeId": 4,
+          "day": "Monday",
+          "start": "15:00",
+          "end": "21:00",
+          "position": "busser"
+        },
+        {
+          "id": 20,
+          "employeeId": 5,
+          "day": "Monday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "busser"
+        },
+        {
+          "id": 21,
+          "employeeId": 1,
+          "day": "Monday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 22,
+          "employeeId": 4,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 23,
+          "employeeId": 1,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "server"
+        },
+        {
+          "id": 24,
+          "employeeId": 5,
+          "day": "Tuesday",
+          "start": "09:00",
+          "end": "13:00",
+          "position": "busser"
+        }
+      ],
+      "createdAt": "2026-03-16T16:09:46.335Z",
+      "updatedAt": "2026-03-16T16:09:46.335Z"
     }
   ],
   "meta": {
-    "nextEmployeeId": 4,
-    "nextWeekId": 4,
-    "nextEntryId": 18
+    "nextEmployeeId": 6,
+    "nextWeekId": 6,
+    "nextEntryId": 26
   }
 }

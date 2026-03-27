@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "username": "manager",
+      "password_hash": "$2a$10$GQzQYkt1HqPEsAoBGAMxmu7QMIp0d1S6OyeuwZyGGkTKVv6Ou.DRO",
+      "role": "manager",
+      "employee_id": null,
+      "id": 1,
+      "created_at": "2026-03-27T16:42:03.129Z",
+      "updated_at": "2026-03-27T16:42:03.129Z"
+    },
+    {
+      "username": "caitlinraymond13@gmail.com",
+      "password_hash": "$2a$10$en79NjeFm1iucuhrnX1wWeogQft0dimvNYQ5zjkDitZVG/qQOZaJu",
+      "role": "employee",
+      "employee_id": 5,
+      "id": 6,
+      "created_at": "2026-03-27T17:13:03.053Z",
+      "updated_at": "2026-03-27T17:14:02.570Z"
+    }
+  ],
+  "nextId": 7
+}
