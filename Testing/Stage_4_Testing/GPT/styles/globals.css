@@ -1,0 +1,349 @@
+:root {
+  color-scheme: dark;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --slate-950: #020617;
+  --slate-900: #0f172a;
+  --slate-800: #1f2937;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5f5;
+  --slate-200: #e2e8f0;
+  --white: #f8fafc;
+  --indigo-500: #6366f1;
+  --indigo-400: #818cf8;
+  --emerald-500: #10b981;
+  --red-500: #ef4444;
+  --border: rgba(148, 163, 184, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--slate-950);
+  color: var(--slate-100, var(--white));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.page-shell {
+  min-height: 100vh;
+  background: var(--slate-950);
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px);
+}
+
+.site-header__content {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 32px 32px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.site-header__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.site-header__description {
+  margin: 4px 0 0;
+  color: var(--slate-400);
+  font-size: 0.85rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tab-button {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--slate-900);
+  color: var(--slate-300);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tab-button--active {
+  background: var(--indigo-500);
+  color: var(--white);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
+}
+
+.main-content {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 32px;
+}
+
+.section {
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  background: rgba(15, 23, 42, 0.7);
+  padding: 28px;
+  margin-bottom: 32px;
+  box-shadow: 0 25px 60px rgba(2, 6, 23, 0.7);
+}
+
+.section__header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.section__title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.section__subtitle {
+  margin: 4px 0 0;
+  color: var(--slate-400);
+  font-size: 0.85rem;
+}
+
+.section__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--slate-300);
+}
+
+.form-field input,
+.form-field select {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  background: var(--slate-900);
+  color: var(--white);
+  font-size: 0.9rem;
+  transition: border 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--indigo-400);
+}
+
+.button {
+  border-radius: 16px;
+  border: none;
+  font-weight: 600;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.button--primary {
+  background: var(--indigo-500);
+  color: var(--white);
+}
+
+.button--primary:active {
+  transform: translateY(1px);
+}
+
+.button--accent {
+  background: var(--emerald-500);
+  color: var(--white);
+}
+
+.button--danger {
+  background: var(--red-500);
+  color: var(--white);
+}
+
+.button--ghost {
+  background: var(--slate-800);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--slate-200);
+}
+
+.cards {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.card__content {
+  flex: 1;
+}
+
+.card__title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.card__meta {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--slate-400);
+}
+
+.schedule-grid {
+  margin-top: 24px;
+  overflow: auto;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+}
+
+.schedule-grid table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.schedule-grid th,
+.schedule-grid td {
+  padding: 10px;
+  border: 1px solid var(--border);
+}
+
+.schedule-grid thead {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.shift-card {
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border);
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.shift-card__time {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.shift-card__position {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+}
+
+.shift-card__actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.hours-panel {
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.hours-panel__item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--slate-300);
+}
+
+.archive-grid,
+.time-off-list,
+.schedule-links {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.archive-card,
+.time-off-card,
+.archive-link {
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  padding: 14px;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.archive-card__title,
+.time-off-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.time-off-card__reason {
+  margin: 4px 0 0;
+  color: var(--slate-400);
+  font-size: 0.8rem;
+}
+
+.time-off-card__status {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--emerald-500);
+}
+
+.request-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.request-row button {
+  font-size: 0.7rem;
+}
+
+.status-message {
+  margin-top: 8px;
+  color: var(--emerald-400);
+  font-size: 0.85rem;
+}
