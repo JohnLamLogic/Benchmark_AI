@@ -7,16 +7,19 @@ const path = require('path');
 // Seed default manager if needed
 require('./db/database');
 
+// File-based session store — survives server restarts
+const JsonSessionStore = require('./db/sessionStore');
+
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: true, credentials: true }));
 
-// In-memory sessions (no native DB required)
 app.use(session({
+  store: new JsonSessionStore(),
   secret: process.env.SESSION_SECRET || 'restaurant-scheduler-secret-key',
-  resave: true,
+  resave: false,
   saveUninitialized: false,
   rolling: true,
   cookie: {

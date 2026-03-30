@@ -1,25 +1,25 @@
 {
   "data": [
     {
-      "employee_id": 5,
-      "request_date": "2026-04-02",
-      "reason": "Its my birthday!",
-      "status": "denied",
-      "manager_notes": "dont care",
-      "id": 3,
-      "created_at": "2026-03-27T17:13:26.272Z",
-      "updated_at": "2026-03-27T17:14:11.884Z"
-    },
-    {
-      "employee_id": 5,
-      "request_date": "2026-04-03",
-      "reason": "Feeling Sick",
+      "employee_id": 11,
+      "request_date": "2026-04-01",
+      "reason": "Doctor",
       "status": "approved",
       "manager_notes": "",
-      "id": 4,
-      "created_at": "2026-03-27T17:13:31.606Z",
-      "updated_at": "2026-03-27T17:14:06.960Z"
+      "id": 14,
+      "created_at": "2026-03-30T16:05:26.792Z",
+      "updated_at": "2026-03-30T16:06:00.037Z"
+    },
+    {
+      "employee_id": 11,
+      "request_date": "2026-04-02",
+      "reason": "Dont want to go.",
+      "status": "denied",
+      "manager_notes": "Cannot approve.",
+      "id": 15,
+      "created_at": "2026-03-30T16:05:33.855Z",
+      "updated_at": "2026-03-30T16:06:05.104Z"
     }
   ],
-  "nextId": 5
+  "nextId": 16
 }

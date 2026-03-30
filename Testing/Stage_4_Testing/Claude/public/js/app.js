@@ -13,6 +13,7 @@ let editingShiftCell = null;       // {employeeId, dayOfWeek} for add modal
 let editingShiftId = null;         // id of shift being edited
 let editingEmployeeId = null;      // id of employee being edited
 let pendingDeleteFn = null;        // callback for confirm modal
+let pendingDenyId = null;          // id of time-off request being denied
 let currentTimeoffFilter = 'all';  // filter for time-off requests
 let employeeCurrentWeekStart = null; // for employee schedule navigation
 
@@ -321,7 +322,9 @@ function switchManagerTab(tab) {
   });
 
   // Load data for tab
-  if (tab === 'employees') {
+  if (tab === 'schedule') {
+    if (currentWeekStart) loadSchedule(currentWeekStart);
+  } else if (tab === 'employees') {
     loadEmployees();
   } else if (tab === 'timeoff') {
     loadTimeOffRequests();
@@ -339,10 +342,10 @@ async function loadSchedule(weekStart) {
   try {
     const [scheduleData, empData] = await Promise.all([
       api('GET', `/api/schedules/${weekStart}`),
-      employees.length > 0 ? Promise.resolve(employees) : api('GET', '/api/employees')
+      api('GET', '/api/employees')
     ]);
 
-    if (!employees.length) employees = empData;
+    employees = empData;
     currentSchedule = scheduleData;
     currentWeekStart = weekStart;
 
@@ -847,6 +850,9 @@ async function saveEmployee(e) {
 
     await loadEmployees();
 
+    // Always refresh the schedule grid so the new/updated employee appears immediately
+    if (currentWeekStart) await loadSchedule(currentWeekStart);
+
     if (!empId) {
       // Keep modal open to show password hint
       document.getElementById('emp-name').value = '';
@@ -954,29 +960,39 @@ function renderTimeOffRequests(requests) {
 
 async function approveRequest(id) {
   try {
-    await api('PUT', `/api/timeoff/${id}`, {
-      status: 'approved',
-      manager_notes: ''
-    });
+    await api('PUT', `/api/timeoff/${id}`, { status: 'approved', manager_notes: '' });
     showToast('Request approved.', 'success');
-    loadTimeOffRequests();
   } catch (err) {
     showToast(`Failed to approve request: ${err.message}`, 'error');
+  } finally {
+    // Always refresh so the UI reflects the true state
+    loadTimeOffRequests();
   }
 }
 
-async function denyRequest(id) {
-  // Prompt for notes
-  const notes = prompt('Enter a reason for denying this request (optional):') || '';
+function denyRequest(id) {
+  // Open the deny modal instead of using prompt() — prompt() blocks the event
+  // loop and causes subsequent fetch() calls to fail in certain browsers.
+  pendingDenyId = id;
+  document.getElementById('deny-notes').value = '';
+  openModal('deny-modal');
+  setTimeout(() => document.getElementById('deny-notes').focus(), 100);
+}
+
+async function confirmDenyRequest() {
+  const id = pendingDenyId;
+  if (!id) return;
+  const notes = document.getElementById('deny-notes').value.trim();
+  closeModal('deny-modal');
+  pendingDenyId = null;
   try {
-    await api('PUT', `/api/timeoff/${id}`, {
-      status: 'denied',
-      manager_notes: notes
-    });
+    await api('PUT', `/api/timeoff/${id}`, { status: 'denied', manager_notes: notes });
     showToast('Request denied.', 'success');
-    loadTimeOffRequests();
   } catch (err) {
     showToast(`Failed to deny request: ${err.message}`, 'error');
+  } finally {
+    // Always refresh so the UI reflects the true state
+    loadTimeOffRequests();
   }
 }
 
@@ -1481,6 +1497,9 @@ function initEventListeners() {
 
   // Load schedule modal confirm
   document.getElementById('confirm-load-btn')?.addEventListener('click', confirmLoadSchedule);
+
+  // Deny time-off request modal confirm
+  document.getElementById('confirm-deny-btn')?.addEventListener('click', confirmDenyRequest);
 
   // Confirm delete modal
   document.getElementById('confirm-delete-btn')?.addEventListener('click', () => {

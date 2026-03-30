@@ -1,0 +1,18 @@
+{
+  "cJIFM4i3PXb7xzzNXstBuC4GTXgTq2EW": {
+    "cookie": {
+      "originalMaxAge": 86400000,
+      "expires": "2026-03-31T16:05:53.427Z",
+      "secure": false,
+      "httpOnly": true,
+      "path": "/",
+      "sameSite": "lax"
+    },
+    "user": {
+      "id": 1,
+      "username": "manager",
+      "role": "manager",
+      "employee_id": null
+    }
+  }
+}

@@ -1,17 +1,4 @@
 {
-  "data": [
-    {
-      "schedule_id": 1,
-      "employee_id": 5,
-      "day_of_week": 0,
-      "start_time": "09:00",
-      "end_time": "17:00",
-      "position": "Server",
-      "notes": "",
-      "id": 13,
-      "created_at": "2026-03-27T17:20:50.939Z",
-      "updated_at": "2026-03-27T17:20:50.939Z"
-    }
-  ],
-  "nextId": 14
+  "data": [],
+  "nextId": 22
 }

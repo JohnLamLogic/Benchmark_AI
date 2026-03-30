@@ -34,7 +34,7 @@ router.post('/', requireAuth, (req, res) => {
   return res.status(201).json(enrich(timeoff.insert({ employee_id: empId, request_date, reason, status: 'pending', manager_notes: '' })));
 });
 
-router.put('/:id', requireManager, async (req, res) => {
+router.put('/:id', requireManager, (req, res) => {
   const { id } = req.params;
   const { status, manager_notes } = req.body;
   if (!['approved', 'denied'].includes(status)) return res.status(400).json({ error: 'status must be "approved" or "denied"' });
@@ -42,13 +42,28 @@ router.put('/:id', requireManager, async (req, res) => {
   if (!request) return res.status(404).json({ error: 'Time off request not found' });
   const updated = timeoff.update(id, { status, manager_notes: manager_notes || '' });
   const enriched = enrich(updated);
-  try {
-    const { sendTimeOffNotification } = require('../utils/gmail');
-    await sendTimeOffNotification(enriched.employee_email, enriched.employee_name, status, request.request_date, manager_notes || '');
-  } catch (err) {
-    console.warn('Failed to send time-off notification email:', err.message);
-  }
-  return res.json(enriched);
+
+  // Respond immediately — never block the request on email delivery
+  res.json(enriched);
+
+  // Send notification email in the background after the response is sent
+  setImmediate(() => {
+    (async () => {
+      try {
+        const { sendTimeOffNotification } = require('../utils/gmail');
+        await sendTimeOffNotification(
+          enriched.employee_email,
+          enriched.employee_name,
+          status,
+          request.request_date,
+          manager_notes || ''
+        );
+        console.log(`Time-off notification sent to ${enriched.employee_email}`);
+      } catch (err) {
+        console.warn('Time-off notification email failed (non-critical):', err.message);
+      }
+    })();
+  });
 });
 
 module.exports = router;
